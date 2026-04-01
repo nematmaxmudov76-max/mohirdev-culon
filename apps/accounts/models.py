@@ -50,14 +50,14 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
         null=True,
         blank=True,
     )
-    is_staff = models.BooleanField(_("is staff"), default = False)
-    is_active = models.BooleanField(_("is active"), default = False)
-    is_deleted = models.BooleanField(_("is deleted"), default = False)
+    is_staff = models.BooleanField(_("is staff"), default=False)
+    is_active = models.BooleanField(_("is active"), default=False)
+    is_deleted = models.BooleanField(_("is deleted"), default=False)
 
     objects = UserManager()
 
-    USERNAME_FIELD =  "phone"
-    REQUEST_FIELD =[]
+    USERNAME_FIELD = "phone"
+    REQUEST_FIELD = []
 
     class Meta:
         verbose_name = _("user")
@@ -69,7 +69,6 @@ class User(AbstractBaseUser, PermissionsMixin, BaseModel):
     @property
     def full_name(self):
         return f"{self.first_name} {self.last_name}".strip()
-    
 
 
 class Education(BaseModel):
@@ -176,7 +175,8 @@ class Author(BaseModel):
         verbose_name=_("avatar"),
     )
     experience_years = models.PositiveIntegerField(_("experience years"), default=0)
-
+    is_active = models.BooleanField(_("is active"), default=True)
+    is_deleted = models.BooleanField(_("is deleted"), default=False)
     class Meta:
         verbose_name = _("author")
         verbose_name_plural = _("authors")

@@ -38,7 +38,7 @@ class UserAdmin(BaseUserAdmin):
             },
         ),
         ("Important dates", {"fields": ("last_login",)}),
-    )
+    )  # fieldsets bu admin panelda qaysi ustunlarni qaysi guruhda chiqarishni belgilaydi
     add_fieldsets = (
         (
             None,
@@ -47,16 +47,18 @@ class UserAdmin(BaseUserAdmin):
                 "fields": ("phone", "password1", "password2"),
             },
         ),
-    )
-    ordering = ["-created_at"]
-    list_per_page = 50
+    )  # add_fieldsets bu admin panelda yangi user qo'shishda qaysi ustunlarni qaysi guruhda chiqarishni belgilaydi
+    ordering = [
+        "-created_at"
+    ]  # qaysi tartibda chiqarish biz hozir aynan oxirgi yaratilgan birinchi chiqishini istaymiz
+    list_per_page = 50  # pagination yani har sahifada 50 tadan chiqaradi
 
 
 @admin.register(Education)
 class EducationAdmin(admin.ModelAdmin):
-    list_display = ["name", "type", "is_active"]
-    list_filter = ["type", "is_active"]
-    search_fields = ["name"]
+    list_display = ["name", "type", "is_active"]  # qaysi ustunlarni chiqarish
+    list_filter = ["type", "is_active"]  # qaysi ustunlarni filter qilish
+    search_fields = ["name"]  # qaysi ustunlarni search qilish
 
 
 @admin.register(UserEducation)

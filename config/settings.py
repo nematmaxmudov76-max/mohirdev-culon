@@ -46,6 +46,7 @@ EXTERNAL_APPS = [
     "rest_framework",
     "jazzmin",
     "drf_spectacular",
+    "rest_framework_simplejwt",
 ]
 
 AUTH_USER_MODEL = "accounts.User"
@@ -96,6 +97,16 @@ DATABASES = {
         "PORT": os.getenv("DB_PORT"),
     }
 }
+
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://localhost:6379/2",
+    }
+}
+
+
 
 
 # Password validation
@@ -152,3 +163,7 @@ SPECTACULAR_SETTINGS = {
     "SERVE_INCLUDE_SCHEMA": False,
     # OTHER SETTINGS
 }
+
+
+ONEID_USERNAME = "eshmatuser"
+ONEID_PASSWORD = "kefy348ryi4fg438i"

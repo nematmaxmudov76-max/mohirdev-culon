@@ -4,50 +4,66 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Country',
+            name="Country",
             fields=[
-                ('id', models.BigAutoField(primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='created at')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='updated at')),
-                ('name', models.CharField(max_length=100, verbose_name='name')),
+                ("id", models.BigAutoField(primary_key=True, serialize=False)),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="created at"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="updated at"),
+                ),
+                ("name", models.CharField(max_length=100, verbose_name="name")),
             ],
             options={
-                'verbose_name': 'country',
-                'verbose_name_plural': 'countries',
+                "verbose_name": "country",
+                "verbose_name_plural": "countries",
             },
         ),
         migrations.CreateModel(
-            name='Media',
+            name="Media",
             fields=[
-                ('id', models.BigAutoField(primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='created at')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='updated at')),
-                ('file_url', models.URLField(max_length=500, verbose_name='file URL')),
+                ("id", models.BigAutoField(primary_key=True, serialize=False)),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="created at"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="updated at"),
+                ),
+                ("file_url", models.URLField(max_length=500, verbose_name="file URL")),
             ],
             options={
-                'verbose_name': 'media',
-                'verbose_name_plural': 'media',
+                "verbose_name": "media",
+                "verbose_name_plural": "media",
             },
         ),
         migrations.CreateModel(
-            name='Region',
+            name="Region",
             fields=[
-                ('id', models.BigAutoField(primary_key=True, serialize=False)),
-                ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='created at')),
-                ('updated_at', models.DateTimeField(auto_now=True, verbose_name='updated at')),
-                ('name', models.CharField(max_length=100, verbose_name='name')),
+                ("id", models.BigAutoField(primary_key=True, serialize=False)),
+                (
+                    "created_at",
+                    models.DateTimeField(auto_now_add=True, verbose_name="created at"),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(auto_now=True, verbose_name="updated at"),
+                ),
+                ("name", models.CharField(max_length=100, verbose_name="name")),
             ],
             options={
-                'verbose_name': 'region',
-                'verbose_name_plural': 'regions',
+                "verbose_name": "region",
+                "verbose_name_plural": "regions",
             },
         ),
     ]
