@@ -13,5 +13,5 @@ class CountrySerializer(ModelSerializer):
 class RegionSerializer(ModelSerializer):
     class Meta:
         model = Region
-        fields = ["id", "name", "country", "created_at", "updated_at"]
+        fields = ["id", "name", "created_at", "updated_at"]
         read_only_fields = ["id", "created_at", "updated_at"]

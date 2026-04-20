@@ -7,9 +7,9 @@ from .author import AuthorSerializer
 from .education import EducationSerializer
 
 __all__ = [
-    "UserProfileAPIView",
-    "UserRegisterAPIView",
-    "UserRegisterConfirmAPIView",
+    "UserProfileSerializer",
+    "UserRegisterSerializer",
+    "UserRegisterConfirmSerializer",
     "AuthorSerializer",
     "EducationSerializer",
 ]

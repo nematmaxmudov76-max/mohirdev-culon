@@ -1,16 +1,17 @@
 from rest_framework.generics import (
-    ListCreateAPIView,
+    ListAPIView,
+    CreateAPIView,
     RetrieveAPIView,
     DestroyAPIView,
-    RetrieveUpdateDestroyAPIView
+    UpdateAPIView,
 )
 
-from apps.common.serializers import  CountrySerializer
+from apps.common.serializers import  CountrySerializer, RegionSerializer
 from apps.common.models import Country, Region
 
 # COUNTRY VIEWS
 
-class CountryListCreateAPIView(ListCreateAPIView):
+class CountryListCreateAPIView(ListAPIView):
     queryset = Country.objects.all().order_by("name")
     serializer_class = CountrySerializer
 
@@ -28,17 +29,25 @@ class CountryRetrieveAPIView(RetrieveAPIView):
 
 # REGION VIEWS
 
-class RegionListCreateAPIView(ListCreateAPIView):
+class RegionCreateAPIView(CreateAPIView):
     queryset = Region.objects.all().order_by("name")
-    serializer_class = CountrySerializer
+    serializer_class = RegionSerializer
 
+class RegionListAPIView(ListAPIView):
+    queryset = Region.objects.all().order_by("name")
+    serializer_class = RegionSerializer
 
-class RegionDestroyAPIView(DestroyAPIView):
+class RegionDeleteAPIView(DestroyAPIView):
     queryset = Region.objects.all()
-    serializer_class = CountrySerializer
+    serializer_class = RegionSerializer
     lookup_field = "id"
 
-class RegionRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+class RegionRetrieveAPIView(RetrieveAPIView):
     queryset = Region.objects.all()
-    serializer_class = CountrySerializer
+    serializer_class = RegionSerializer
+    lookup_field = "id"
+
+class RegionUpdateAPIView(UpdateAPIView):
+    queryset = Region.objects.all()
+    serializer_class = RegionSerializer
     lookup_field = "id"

@@ -1,5 +1,5 @@
 from django.contrib import admin
-
+from modeltranslation.admin import TranslationAdmin
 from apps.courses.models import Category, Course, CourseTag, Lesson, Module, Tag
 
 
@@ -21,19 +21,19 @@ class LessonInline(admin.TabularInline):
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TranslationAdmin, admin.ModelAdmin):
     list_display = ["name"]
     search_fields = ["name"]
 
 
 @admin.register(Tag)
-class TagAdmin(admin.ModelAdmin):
+class TagAdmin(TranslationAdmin, admin.ModelAdmin):
     list_display = ["name"]
     search_fields = ["name"]
 
 
 @admin.register(Course)
-class CourseAdmin(admin.ModelAdmin):
+class CourseAdmin(TranslationAdmin, admin.ModelAdmin):
     list_display = [
         "name",
         "author",
@@ -49,7 +49,7 @@ class CourseAdmin(admin.ModelAdmin):
 
 
 @admin.register(Module)
-class ModuleAdmin(admin.ModelAdmin):
+class ModuleAdmin(TranslationAdmin, admin.ModelAdmin):
     list_display = ["name", "course", "course_order"]
     list_filter = ["course"]
     search_fields = ["name", "course__name"]
@@ -57,7 +57,7 @@ class ModuleAdmin(admin.ModelAdmin):
 
 
 @admin.register(Lesson)
-class LessonAdmin(admin.ModelAdmin):
+class LessonAdmin(TranslationAdmin, admin.ModelAdmin):
     list_display = [
         "name",
         "module",

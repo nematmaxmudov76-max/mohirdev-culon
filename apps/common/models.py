@@ -12,14 +12,15 @@ class BaseModel(models.Model):
 
 
 class Media(BaseModel):
-    file_url = models.URLField(_("file URL"), max_length=500)
+    file_url = models.FileField(_("File URL"), max_length=500, upload_to="media/", blank=True, null=True)
 
     class Meta:
         verbose_name = _("media")
         verbose_name_plural = _("media")
 
     def __str__(self):
-        return self.file_url
+
+        return f"{self.file_url.url}"
 
 
 class Country(BaseModel):
@@ -34,6 +35,7 @@ class Country(BaseModel):
 
 
 class Region(BaseModel):
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, related_name="regions", null=True, blank=True, verbose_name=_("country"))
     name = models.CharField(_("name"), max_length=100)
 
     class Meta:

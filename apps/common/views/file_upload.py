@@ -13,17 +13,20 @@ class FileUploadAPIView(CreateAPIView):
 
     @extend_schema(request={"multipart/form-data": FileUploadSerializer})
     def post(self, request, *args, **kwargs):
-        file = request.data.get("file")
-        request.data["file"] = file
+        file = request.data.get("file_url")
+        request.data["file_url  "] = file
 
         if file.size > 5 * 1024 * 1024:
-            raise ValidationError({"file": "file 5 mb dan oshib ketdi"})
+            raise ValidationError({"file_url": "file 5 mb dan oshib ketdi"})
 
         if file.content_type not in [
             "image/jpeg",
             "image/png",
             "image/gif",
+            "image/webp",
+            "image/svg+xml",
+            "application/pdf",
         ]:
-            raise ValidationError({"file": "file image tip da bo'lish kerak"})
+            raise ValidationError({"file_url": "file image tip da bo'lish kerak"})
 
         return super().post(request, *args, **kwargs)

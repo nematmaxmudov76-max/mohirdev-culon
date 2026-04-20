@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+from django.utils.translation import gettext_lazy as _
 from dotenv import load_dotenv
 
 from .jazzmin import JAZZMIN_SETTINGS  # noqa
@@ -40,13 +41,17 @@ LOCAL_APPS = [
     "apps.interactions",
     "apps.notifications",
     "apps.common",
+    "apps.payments",
 ]
 
 EXTERNAL_APPS = [
+    "modeltranslation",
     "rest_framework",
     "jazzmin",
     "drf_spectacular",
     "rest_framework_simplejwt",
+    "rosetta", 
+    "django_celery_beat",
 ]
 
 AUTH_USER_MODEL = "accounts.User"
@@ -59,6 +64,7 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -107,8 +113,6 @@ CACHES = {
 }
 
 
-
-
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
@@ -133,11 +137,20 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Tashkent"
 
 USE_I18N = True
-
 USE_TZ = True
+
+LANGUAGES = [
+    ("uz", _("Uzbek")),
+    ("ru", _("Russian")),
+    ("en", _("English")),
+]
+
+LOCALE_PATHS = (BASE_DIR / "locale",)
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = "en"
 
 
 # Static files (CSS, JavaScript, Images)
@@ -153,17 +166,32 @@ MEDIA_ROOT = BASE_DIR / "media"
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ],
     "PAGE_SIZE": 50,
 }
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "UICDev API",
-    "DESCRIPTION": "Ikkichilar uchun LMS platforma",
+    "DESCRIPTION": "LMS platforma",
     "VERSION": "0.1.0",
     "SERVE_INCLUDE_SCHEMA": False,
     # OTHER SETTINGS
+    "COMPONENT_SPLIT_REQUEST": True,
 }
 
 
 ONEID_USERNAME = "eshmatuser"
 ONEID_PASSWORD = "kefy348ryi4fg438i"
+
+
+# Celery Configuration Options
+CELERY_TIMEZONE = "Asia/Tashkent"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
+CELERY_BROKER_URL = "redis://localhost:6379/10"
+CELERY_RESULT_BACKEND = "redis://localhost:6379/9"
+
+SMS_TOKEN = os.getenv("SMS_TOKEN")

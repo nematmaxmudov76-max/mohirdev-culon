@@ -7,7 +7,7 @@ class FileUploadSerializer(ModelSerializer):
         model = Media
         fields = [
             "id",
-            "file",
+            "file_url",
             "created_at",
             "updated_at",
         ]
